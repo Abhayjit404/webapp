@@ -1,10 +1,9 @@
 pipeline {
 
-     agent {
-          
-     node { 
-          label 'master'
-     }
+    agent {
+          node{
+               label 'master'
+          }
      }
      
     stages {
@@ -16,7 +15,7 @@ pipeline {
     PROJECT_NAME = "abhay"
   }
   steps {
-    withSonarQubeEnv('Sonar') {
+    withSonarQubeEnv('Sonarqube') {
         sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=$ORGANIZATION \
         -Dsonar.java.binaries=build/classes/java/ \
         -Dsonar.projectKey=$PROJECT_NAME \
