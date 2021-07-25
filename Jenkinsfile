@@ -6,12 +6,12 @@ agent any
          
       stage('SonarCloud_static_code_analysis') {
   environment {
-    SCANNER_HOME = tool 'Sonar'
-    ORGANIZATION = "demo1_maven_freestyle"
-    PROJECT_NAME = "demo1_maven_freestyle"
+    SCANNER_HOME = tool 'sonarqube1'
+    ORGANIZATION = "abhay"
+    PROJECT_NAME = "abhay"
   }
   steps {
-    withSonarQubeEnv('Sonarqube') {
+    withSonarQubeEnv('sonarqube1') {
         sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=$ORGANIZATION \
         -Dsonar.java.binaries=build/classes/java/ \
         -Dsonar.projectKey=$PROJECT_NAME \
@@ -47,7 +47,8 @@ agent any
         stage('Deploy') {
             steps {
                 
-                sh 'mvn deploy'
+    //            sh 'mvn deploy'
+                 sh 'echo hello'
             }
             
         }           
@@ -70,8 +71,8 @@ agent any
 def notifyBuild(String buildStatus = 'STARTED', String colorCode = '#5492f7', String notify = '') {
 
   def project = 'webapp'
-  def channel = "# jenkins-alert"
-  def base = "https://github.com/sunil-paswan/${project}/commits/"
+  def channel = "# mbrdi-poc"
+  def base = "https://github.com/Abhayjit404/${project}/commits/"
 
   def commit = sh(returnStdout: true, script: 'git log -n 1 --format="%H"').trim()
   def link = "${base}${commit}"
