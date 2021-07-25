@@ -9,14 +9,14 @@ pipeline {
      
     stages {
          
-      stage('SonarCloud_static_code_analysis') {
+      stage('static_code_analysis') {
   environment {
-    SCANNER_HOME = tool 'sonarqube1'
+    SCANNER_HOME = tool 'Sonar'
     ORGANIZATION = "abhay"
     PROJECT_NAME = "abhay"
   }
   steps {
-    withSonarQubeEnv('sonarqube1') {
+    withSonarQubeEnv('Sonar') {
         sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=$ORGANIZATION \
         -Dsonar.java.binaries=build/classes/java/ \
         -Dsonar.projectKey=$PROJECT_NAME \
